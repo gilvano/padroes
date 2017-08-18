@@ -2,12 +2,15 @@ program padroes;
 
 uses
   Forms,
-  uPrinc in 'uPrinc.pas' {Form1};
+  uPrinc in 'uPrinc.pas' {FormPrinc},
+  uOrcamento in 'strategy\uOrcamento.pas',
+  uImposto in 'strategy\uImposto.pas',
+  uCalculador in 'strategy\uCalculador.pas';
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TFormPrinc, FormPrinc);
   Application.Run;
 end.
