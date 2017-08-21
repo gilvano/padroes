@@ -8,11 +8,14 @@ uses
 
 type
   TFormPrinc = class(TForm)
-    TabControl1: TTabControl;
-    btnOrcamento: TButton;
+    btnStrategy: TButton;
     mmOrca: TMemo;
-    procedure btnOrcamentoClick(Sender: TObject);
+    btnChainofResponsibility: TButton;
+    procedure btnStrategyClick(Sender: TObject);
+    procedure btnChainofResponsibilityClick(Sender: TObject);
   private
+    procedure StrategyExemplo01;
+    procedure ChainofResponsibilityExemplo01;
     { Private declarations }
   public
     { Public declarations }
@@ -25,7 +28,12 @@ implementation
 
 {$R *.dfm}
 
-procedure TFormPrinc.btnOrcamentoClick(Sender: TObject);
+procedure TFormPrinc.btnStrategyClick(Sender: TObject);
+begin
+  StrategyExemplo01;
+end;
+
+procedure TFormPrinc.StrategyExemplo01;
 var
   oCalculador: TCalculador;
   oIcms: IImposto;
@@ -51,6 +59,35 @@ begin
     nValorImp := oCalculador.realizaCalculo(oOrcamento, oIss);
     mmOrca.Lines.Add('ISS: '+FloatToStr(nValorImp));
   
+    mmOrca.Lines.Add('Fim do Cálculo!');
+  finally
+    oOrcamento.Free;
+    oCalculador.Free;
+  end;
+end;
+
+procedure TFormPrinc.btnChainofResponsibilityClick(Sender: TObject);
+begin
+  ChainofResponsibilityExemplo01;
+end;
+
+procedure TFormPrinc.ChainofResponsibilityExemplo01;
+var
+  oOrcamento: TOrcamento;
+  oCalculador: TCalculador;
+  nValorDesc: Extended;
+begin
+  try
+    oCalculador := TCalculador.Create();
+    oOrcamento := TOrcamento.Create(600);
+    oOrcamento.AddItem(TItem.Create('Item 01', 300));
+    oOrcamento.AddItem(TItem.Create('Item 02', 200));
+    oOrcamento.AddItem(TItem.Create('Item 03', 100));
+
+    nValorDesc := oCalculador.CalcularDesconto(oOrcamento);
+
+    mmOrca.Lines.Add('Inicio do Cálculo!');
+    mmOrca.Lines.Add('Valor do Desconto: '+FloatToStr(nValorDesc));
     mmOrca.Lines.Add('Fim do Cálculo!');
   finally
     oOrcamento.Free;
