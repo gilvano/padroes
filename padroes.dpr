@@ -3,10 +3,11 @@ program padroes;
 uses
   Forms,
   uPrinc in 'uPrinc.pas' {FormPrinc},
-  uOrcamento in 'strategy\uOrcamento.pas',
-  uImposto in 'strategy\uImposto.pas',
-  uCalculador in 'strategy\uCalculador.pas',
-  uDesconto in 'ChainofResponsibility\uDesconto.pas';
+  uOrcamento in 'Strategy\uOrcamento.pas',
+  uImposto in 'Strategy\uImposto.pas',
+  uCalculador in 'Strategy\uCalculador.pas',
+  uDesconto in 'ChainOfResponsibility\uDesconto.pas',
+  uTemplateDeImposto in 'TemplateMethod\uTemplateDeImposto.pas';
 
 {$R *.res}
 

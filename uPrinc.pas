@@ -4,18 +4,21 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ComCtrls, StdCtrls, uOrcamento, uImposto, uCalculador;
+  Dialogs, ComCtrls, StdCtrls, uOrcamento, uImposto, uCalculador, uTemplateDeImposto;
 
 type
   TFormPrinc = class(TForm)
-    btnStrategy: TButton;
     mmOrca: TMemo;
+    btnStrategy: TButton;
     btnChainofResponsibility: TButton;
+    btnTemplateMethod: TButton;
     procedure btnStrategyClick(Sender: TObject);
     procedure btnChainofResponsibilityClick(Sender: TObject);
+    procedure btnTemplateMethodClick(Sender: TObject);
   private
     procedure StrategyExemplo01;
     procedure ChainofResponsibilityExemplo01;
+    procedure TemplateMethodExemplo01;
     { Private declarations }
   public
     { Public declarations }
@@ -93,6 +96,38 @@ begin
     oOrcamento.Free;
     oCalculador.Free;
   end;
+end;
+
+procedure TFormPrinc.btnTemplateMethodClick(Sender: TObject);
+begin
+  TemplateMethodExemplo01
+end;
+
+procedure TFormPrinc.TemplateMethodExemplo01;
+var
+  oCalculador: TCalculador;
+  oIcpp: IImposto;
+  oOrcamento: TOrcamento;
+  nValorImp: Extended;
+begin
+  oIcpp := TICPP.Create;
+
+  try
+    oOrcamento := TOrcamento.Create(1000);
+    oCalculador := TCalculador.Create();
+
+    mmOrca.Lines.Add('Inicio do Cálculo!');
+
+    // Calculando o ICPP
+    nValorImp := oCalculador.realizaCalculo(oOrcamento, oIcpp);
+    mmOrca.Lines.Add('ICPP: '+FloatToStr(nValorImp));
+  
+    mmOrca.Lines.Add('Fim do Cálculo!');
+  finally
+    oOrcamento.Free;
+    oCalculador.Free;
+  end;
+
 end;
 
 end.

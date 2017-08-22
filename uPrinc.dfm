@@ -44,4 +44,13 @@ object FormPrinc: TFormPrinc
     TabOrder = 2
     OnClick = btnChainofResponsibilityClick
   end
+  object btnTemplateMethod: TButton
+    Left = 306
+    Top = 17
+    Width = 128
+    Height = 45
+    Caption = 'Template Method'
+    TabOrder = 3
+    OnClick = btnTemplateMethodClick
+  end
 end
